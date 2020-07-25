@@ -158,7 +158,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void machineShouldDisplaySoldOutWhenColaIsOutOfStock(){
+    public void machineShouldDisplaySoldOutWhenColaIsOutOfStock() {
         underTest.insertCoin("Quarter");
         underTest.insertCoin("Quarter");
         underTest.insertCoin("Quarter");
@@ -172,7 +172,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void machineShouldDisplaySoldOutWhenChipsIsOutOfStock(){
+    public void machineShouldDisplaySoldOutWhenChipsIsOutOfStock() {
         underTest.insertCoin("Quarter");
         underTest.insertCoin("Quarter");
         underTest.selectProduct("Chips");
@@ -184,7 +184,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void machineShouldDisplaySoldOutWhenCandyIsOutOfStock(){
+    public void machineShouldDisplaySoldOutWhenCandyIsOutOfStock() {
         underTest.insertCoin("Quarter");
         underTest.insertCoin("Quarter");
         underTest.insertCoin("Dime");
@@ -195,5 +195,17 @@ public class VendingMachineTest {
         underTest.selectProduct("Candy");
         assertThat(underTest.displayStatus()).isEqualTo("Sold Out");
         assertThat(underTest.displayStatus()).isEqualTo("Insert Coin");
+    }
+
+    @Test
+    public void machineDisplaysExactChangeOnlyWhenItDoesntHaveCoinsForChange() {
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.selectProduct("Candy");
+        underTest.emptyCoinReturn();
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+        assertThat(underTest.displayStatus()).isEqualTo("Exact Change Only");
     }
 }

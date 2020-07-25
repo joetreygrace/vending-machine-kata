@@ -11,12 +11,18 @@ public class VendingMachine {
     private int colaStock = 1;
     private int chipsStock = 1;
     private int candyStock = 1;
+    private int quartersForChange = 1;
+    private int nickelsForChange = 1;
+    private int dimesForChange = 1;
 
     public String displayStatus() {
         if (displayMessage == "Thank You") {
             String updatedMessage = displayMessage;
             displayMessage = "";
             return updatedMessage;
+        }
+        if (quartersForChange == 0 || nickelsForChange == 0 || dimesForChange == 0) {
+            return displayMessage = "Exact Change Only";
         }
         if (displayMessage == "Sold Out") {
             String updatedMessage = displayMessage;
@@ -108,14 +114,17 @@ public class VendingMachine {
         while (coinSlotBalance.doubleValue() > 0) {
             if (coinSlotBalance.doubleValue() >= 0.25) {
                 coinReturn.add("Quarter");
+                quartersForChange -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.25));
             }
             if (coinSlotBalance.doubleValue() >= 0.10) {
                 coinReturn.add("Dime");
+                dimesForChange -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.10));
             }
             if (coinSlotBalance.doubleValue() >= 0.05) {
                 coinReturn.add("Nickel");
+                nickelsForChange -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.05));
             }
         }
