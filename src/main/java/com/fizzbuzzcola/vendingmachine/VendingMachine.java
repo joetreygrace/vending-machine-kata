@@ -84,6 +84,8 @@ public class VendingMachine {
             }
             if (coinSlotBalance.doubleValue() >= 0.65) {
                 displayMessage = "Thank You";
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.65));
+                makeChange();
             }
         }
     }
