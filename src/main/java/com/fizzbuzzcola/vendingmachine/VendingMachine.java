@@ -42,14 +42,11 @@ public class VendingMachine {
     public void insertCoin(String coin) {
         if (coin.equalsIgnoreCase("Nickel")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.05));
-        }
-        else if (coin.equalsIgnoreCase("Dime")) {
+        } else if (coin.equalsIgnoreCase("Dime")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.10));
-        }
-        else if (coin.equalsIgnoreCase("Quarter")) {
+        } else if (coin.equalsIgnoreCase("Quarter")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.25));
-        }
-        else {
+        } else {
             coinReturn.add(coin);
         }
     }
@@ -68,20 +65,7 @@ public class VendingMachine {
             if (coinSlotBalance.doubleValue() >= 1.00) {
                 displayMessage = "Thank You";
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(1.00));
-                while(coinSlotBalance.doubleValue() > 0) {
-                    if (coinSlotBalance.doubleValue() >= 0.25) {
-                        coinReturn.add("Quarter");
-                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.25));
-                    }
-                    if (coinSlotBalance.doubleValue() >= 0.10) {
-                        coinReturn.add("Dime");
-                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.10));
-                    }
-                    if (coinSlotBalance.doubleValue() >= 0.05) {
-                        coinReturn.add("Nickel");
-                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.05));
-                    }
-                }
+                makeChange();
             }
         }
         if (product.equalsIgnoreCase("Chips")) {
@@ -90,6 +74,8 @@ public class VendingMachine {
             }
             if (coinSlotBalance.doubleValue() >= 0.50) {
                 displayMessage = "Thank You";
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.50));
+                makeChange();
             }
         }
         if (product.equalsIgnoreCase("Candy")) {
@@ -98,6 +84,23 @@ public class VendingMachine {
             }
             if (coinSlotBalance.doubleValue() >= 0.65) {
                 displayMessage = "Thank You";
+            }
+        }
+    }
+
+    private void makeChange() {
+        while (coinSlotBalance.doubleValue() > 0) {
+            if (coinSlotBalance.doubleValue() >= 0.25) {
+                coinReturn.add("Quarter");
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.25));
+            }
+            if (coinSlotBalance.doubleValue() >= 0.10) {
+                coinReturn.add("Dime");
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.10));
+            }
+            if (coinSlotBalance.doubleValue() >= 0.05) {
+                coinReturn.add("Nickel");
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.05));
             }
         }
     }

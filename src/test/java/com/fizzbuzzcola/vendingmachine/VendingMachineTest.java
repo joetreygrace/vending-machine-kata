@@ -121,6 +121,18 @@ public class VendingMachineTest {
         assertThat(returnedCoins).containsExactlyInAnyOrder("Quarter", "Nickel", "Dime");
     }
 
+    @Test
+    public void machineShouldMakeChangeWhenMoneyInsertedIsMoreThanCostOfChips() {
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Nickel");
+        underTest.insertCoin("Dime");
+        underTest.selectProduct("Chips");
+        List<String> returnedCoins = underTest.emptyCoinReturn();
+        assertThat(returnedCoins).containsExactlyInAnyOrder("Quarter", "Nickel", "Dime");
+    }
+
 //    @Test
 //    public void returnCoinsShouldReturnCustomerTheirMoney() {
 //        underTest.insertCoin("Quarter");
