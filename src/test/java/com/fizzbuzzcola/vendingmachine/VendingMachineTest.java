@@ -93,4 +93,17 @@ public class VendingMachineTest {
         underTest.selectProduct("chips");
         assertThat(underTest.displayStatus()).isEqualTo("Thank You");
     }
+
+    @Test
+    public void whenCandySelectedAndEnoughMoneyInsertedDisplayReturnsThankYou() {
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("nickel");
+        underTest.selectProduct("candy");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+    }
 }
