@@ -156,4 +156,18 @@ public class VendingMachineTest {
         List<String> returnedCoins = underTest.emptyCoinReturn();
         assertThat(returnedCoins).containsExactlyInAnyOrder("Quarter", "Nickel", "Dime");
     }
+
+    @Test
+    public void machineShouldDisplaySoldOutWhenColaIsOutOfStock(){
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.selectProduct("Cola");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+        assertThat(underTest.getColaStock()).isEqualTo(0);
+        underTest.selectProduct("Cola");
+        assertThat(underTest.displayStatus()).isEqualTo("Sold Out");
+        assertThat(underTest.displayStatus()).isEqualTo("Insert Coin");
+    }
 }

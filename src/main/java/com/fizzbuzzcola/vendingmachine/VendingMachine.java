@@ -8,9 +8,15 @@ public class VendingMachine {
     private BigDecimal coinSlotBalance = BigDecimal.ZERO;
     private List<String> coinReturn = new ArrayList<>();
     private String displayMessage;
+    private int colaStock = 1;
 
     public String displayStatus() {
         if (displayMessage == "Thank You") {
+            String updatedMessage = displayMessage;
+            displayMessage = "";
+            return updatedMessage;
+        }
+        if (displayMessage == "Sold Out") {
             String updatedMessage = displayMessage;
             displayMessage = "";
             return updatedMessage;
@@ -59,11 +65,15 @@ public class VendingMachine {
 
     public void selectProduct(String product) {
         if (product.equalsIgnoreCase("Cola")) {
-            if (coinSlotBalance.doubleValue() < 1.00) {
+            if(colaStock == 0){
+                displayMessage = "Sold Out";
+            }
+            else if (coinSlotBalance.doubleValue() < 1.00) {
                 displayMessage = "Price: $1.00";
             }
-            if (coinSlotBalance.doubleValue() >= 1.00) {
+            else if (coinSlotBalance.doubleValue() >= 1.00) {
                 displayMessage = "Thank You";
+                colaStock -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(1.00));
                 makeChange();
             }
@@ -123,5 +133,8 @@ public class VendingMachine {
         return displayMessage;
     }
 
+    public int getColaStock() {
+        return colaStock;
+    }
 }
 
