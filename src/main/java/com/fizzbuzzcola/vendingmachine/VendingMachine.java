@@ -134,18 +134,6 @@ public class VendingMachine {
         makeChange();
     }
 
-    public BigDecimal getCoinSlotBalance() {
-        return coinSlotBalance;
-    }
-
-    public List<String> getCoinReturn() {
-        return coinReturn;
-    }
-
-    public String getDisplayMessage() {
-        return displayMessage;
-    }
-
     public int getColaStock() {
         return colaStock;
     }
