@@ -13,7 +13,7 @@ public class VendingMachineTest {
 
     @BeforeEach
     void setup() {
-         underTest = new VendingMachine();
+        underTest = new VendingMachine();
     }
 
     @Test
@@ -68,7 +68,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void whenColaSelectedAndEnoughMoneyInsertedDisplayReturnsThankYou(){
+    public void whenColaSelectedAndEnoughMoneyInsertedDisplayReturnsThankYou() {
         underTest.insertCoin("dime");
         underTest.insertCoin("dime");
         underTest.insertCoin("dime");
@@ -83,4 +83,14 @@ public class VendingMachineTest {
         assertThat(underTest.displayStatus()).isEqualTo("Thank You");
     }
 
+    @Test
+    public void whenChipsSelectedAndEnoughMoneyInsertedDisplayReturnsThankYou() {
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.selectProduct("chips");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+    }
 }

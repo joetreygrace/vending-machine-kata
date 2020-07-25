@@ -63,13 +63,17 @@ public class VendingMachine {
         if (product.equalsIgnoreCase("Cola")) {
             if (coinSlotBalance.doubleValue() < 1.00) {
                 displayMessage = "Price: $1.00";
-            } if (coinSlotBalance.doubleValue() >= 1.00) {
+            }
+            if (coinSlotBalance.doubleValue() >= 1.00) {
                 displayMessage = "Thank You";
             }
         }
         if (product.equalsIgnoreCase("Chips")) {
             if (coinSlotBalance.doubleValue() < 0.50) {
                 displayMessage = "Price: $0.50";
+            }
+            if (coinSlotBalance.doubleValue() >= 0.50) {
+                displayMessage = "Thank You";
             }
         }
         if (product.equalsIgnoreCase("Candy")) {
