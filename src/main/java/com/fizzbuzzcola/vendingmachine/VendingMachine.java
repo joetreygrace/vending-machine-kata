@@ -107,12 +107,9 @@ public class VendingMachine {
         }
     }
 
-//    public void returnCoins() {
-//        if(coinSlotBalance.doubleValue() == 0.05){
-//            coinReturn.add("nickel");
-//            coinSlotBalance = BigDecimal.valueOf(0.00);
-//        }
-//    }
+    public void returnCoins() {
+        makeChange();
+    }
 
     public BigDecimal getCoinSlotBalance() {
         return coinSlotBalance;
@@ -125,5 +122,6 @@ public class VendingMachine {
     public String getDisplayMessage() {
         return displayMessage;
     }
+
 }
 
