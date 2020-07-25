@@ -9,6 +9,8 @@ public class VendingMachine {
     private List<String> coinReturn = new ArrayList<>();
     private String displayMessage;
     private int colaStock = 1;
+    private int chipsStock = 1;
+    private int candyStock = 1;
 
     public String displayStatus() {
         if (displayMessage == "Thank You") {
@@ -65,13 +67,11 @@ public class VendingMachine {
 
     public void selectProduct(String product) {
         if (product.equalsIgnoreCase("Cola")) {
-            if(colaStock == 0){
+            if (colaStock == 0) {
                 displayMessage = "Sold Out";
-            }
-            else if (coinSlotBalance.doubleValue() < 1.00) {
+            } else if (coinSlotBalance.doubleValue() < 1.00) {
                 displayMessage = "Price: $1.00";
-            }
-            else if (coinSlotBalance.doubleValue() >= 1.00) {
+            } else if (coinSlotBalance.doubleValue() >= 1.00) {
                 displayMessage = "Thank You";
                 colaStock -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(1.00));
@@ -79,21 +79,25 @@ public class VendingMachine {
             }
         }
         if (product.equalsIgnoreCase("Chips")) {
-            if (coinSlotBalance.doubleValue() < 0.50) {
+            if (chipsStock == 0) {
+                displayMessage = "Sold Out";
+            } else if (coinSlotBalance.doubleValue() < 0.50) {
                 displayMessage = "Price: $0.50";
-            }
-            if (coinSlotBalance.doubleValue() >= 0.50) {
+            } else if (coinSlotBalance.doubleValue() >= 0.50) {
                 displayMessage = "Thank You";
+                chipsStock -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.50));
                 makeChange();
             }
         }
         if (product.equalsIgnoreCase("Candy")) {
-            if (coinSlotBalance.doubleValue() < 0.65) {
+            if (candyStock == 0) {
+                displayMessage = "Sold Out";
+            } else if (coinSlotBalance.doubleValue() < 0.65) {
                 displayMessage = "Price: $0.65";
-            }
-            if (coinSlotBalance.doubleValue() >= 0.65) {
+            } else if (coinSlotBalance.doubleValue() >= 0.65) {
                 displayMessage = "Thank You";
+                candyStock -= 1;
                 coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.65));
                 makeChange();
             }
@@ -135,6 +139,14 @@ public class VendingMachine {
 
     public int getColaStock() {
         return colaStock;
+    }
+
+    public int getChipsStock() {
+        return chipsStock;
+    }
+
+    public int getCandyStock() {
+        return candyStock;
     }
 }
 

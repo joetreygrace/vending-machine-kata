@@ -170,4 +170,30 @@ public class VendingMachineTest {
         assertThat(underTest.displayStatus()).isEqualTo("Sold Out");
         assertThat(underTest.displayStatus()).isEqualTo("Insert Coin");
     }
+
+    @Test
+    public void machineShouldDisplaySoldOutWhenChipsIsOutOfStock(){
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.selectProduct("Chips");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+        assertThat(underTest.getChipsStock()).isEqualTo(0);
+        underTest.selectProduct("Chips");
+        assertThat(underTest.displayStatus()).isEqualTo("Sold Out");
+        assertThat(underTest.displayStatus()).isEqualTo("Insert Coin");
+    }
+
+    @Test
+    public void machineShouldDisplaySoldOutWhenCandyIsOutOfStock(){
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Dime");
+        underTest.insertCoin("Nickel");
+        underTest.selectProduct("Candy");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+        assertThat(underTest.getCandyStock()).isEqualTo(0);
+        underTest.selectProduct("Candy");
+        assertThat(underTest.displayStatus()).isEqualTo("Sold Out");
+        assertThat(underTest.displayStatus()).isEqualTo("Insert Coin");
+    }
 }
