@@ -54,4 +54,10 @@ public class VendingMachineTest {
         assertThat(underTest.displayStatus()).isEqualTo("Price: $1.00");
 
     }
+
+    @Test
+    public void ifChipsAreSelectedBeforeEnoughMoneyInsertedDisplayShouldReturnPrice() {
+        underTest.selectProduct("Chips");
+        assertThat(underTest.displayStatus()).isEqualTo("Price: $0.50");
+    }
 }

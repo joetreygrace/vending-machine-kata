@@ -15,23 +15,28 @@ public class VendingMachine {
             displayMessage = "";
             return updatedMessage;
         }
+        if (displayMessage == "Price: $0.50") {
+            String updatedMessage = displayMessage;
+            displayMessage = "";
+            return updatedMessage;
+        }
         if (coinSlotBalance.doubleValue() == 0) {
             displayMessage = "Insert Coin";
             return displayMessage;
         }
-            displayMessage = coinSlotBalance.setScale(2).toString();
-            return displayMessage;
+        displayMessage = coinSlotBalance.setScale(2).toString();
+        return displayMessage;
 
     }
 
     public void insertCoin(String coin) {
-        if(coin.equalsIgnoreCase("Nickel")) {
+        if (coin.equalsIgnoreCase("Nickel")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.05));
         }
-        if(coin.equalsIgnoreCase("Dime")) {
+        if (coin.equalsIgnoreCase("Dime")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.10));
         }
-        if(coin.equalsIgnoreCase("Quarter")) {
+        if (coin.equalsIgnoreCase("Quarter")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.25));
         } else {
             coinReturn.add(coin);
@@ -45,9 +50,14 @@ public class VendingMachine {
     }
 
     public void selectProduct(String product) {
-        if(product.equalsIgnoreCase("Cola")) {
-            if(coinSlotBalance.doubleValue() < 1.00) {
+        if (product.equalsIgnoreCase("Cola")) {
+            if (coinSlotBalance.doubleValue() < 1.00) {
                 displayMessage = "Price: $1.00";
+            }
+        }
+        if (product.equalsIgnoreCase("Chips")) {
+            if (coinSlotBalance.doubleValue() < 0.50) {
+                displayMessage = "Price: $0.50";
             }
         }
     }
