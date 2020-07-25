@@ -43,12 +43,13 @@ public class VendingMachine {
         if (coin.equalsIgnoreCase("Nickel")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.05));
         }
-        if (coin.equalsIgnoreCase("Dime")) {
+        else if (coin.equalsIgnoreCase("Dime")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.10));
         }
-        if (coin.equalsIgnoreCase("Quarter")) {
+        else if (coin.equalsIgnoreCase("Quarter")) {
             coinSlotBalance = coinSlotBalance.add(BigDecimal.valueOf(0.25));
-        } else {
+        }
+        else {
             coinReturn.add(coin);
         }
     }
@@ -66,6 +67,21 @@ public class VendingMachine {
             }
             if (coinSlotBalance.doubleValue() >= 1.00) {
                 displayMessage = "Thank You";
+                coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(1.00));
+                while(coinSlotBalance.doubleValue() > 0) {
+                    if (coinSlotBalance.doubleValue() >= 0.25) {
+                        coinReturn.add("Quarter");
+                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.25));
+                    }
+                    if (coinSlotBalance.doubleValue() >= 0.10) {
+                        coinReturn.add("Dime");
+                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.10));
+                    }
+                    if (coinSlotBalance.doubleValue() >= 0.05) {
+                        coinReturn.add("Nickel");
+                        coinSlotBalance = coinSlotBalance.subtract(BigDecimal.valueOf(0.05));
+                    }
+                }
             }
         }
         if (product.equalsIgnoreCase("Chips")) {
@@ -85,4 +101,24 @@ public class VendingMachine {
             }
         }
     }
+
+//    public void returnCoins() {
+//        if(coinSlotBalance.doubleValue() == 0.05){
+//            coinReturn.add("nickel");
+//            coinSlotBalance = BigDecimal.valueOf(0.00);
+//        }
+//    }
+
+    public BigDecimal getCoinSlotBalance() {
+        return coinSlotBalance;
+    }
+
+    public List<String> getCoinReturn() {
+        return coinReturn;
+    }
+
+    public String getDisplayMessage() {
+        return displayMessage;
+    }
 }
+

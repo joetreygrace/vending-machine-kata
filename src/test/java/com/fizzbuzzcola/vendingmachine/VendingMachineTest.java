@@ -106,4 +106,28 @@ public class VendingMachineTest {
         underTest.selectProduct("candy");
         assertThat(underTest.displayStatus()).isEqualTo("Thank You");
     }
+
+    @Test
+    public void machineShouldMakeChangeWhenMoneyInsertedIsMoreThanCostOfSoda() {
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Quarter");
+        underTest.insertCoin("Nickel");
+        underTest.insertCoin("Dime");
+        underTest.selectProduct("Cola");
+        List<String> returnedCoins = underTest.emptyCoinReturn();
+        assertThat(returnedCoins).containsExactlyInAnyOrder("Quarter", "Nickel", "Dime");
+    }
+
+//    @Test
+//    public void returnCoinsShouldReturnCustomerTheirMoney() {
+//        underTest.insertCoin("Quarter");
+//        underTest.insertCoin("Nickel");
+//        underTest.insertCoin("Dime");
+//        underTest.returnCoins();
+//        List<String> returnedCoins = underTest.emptyCoinReturn();
+//        assertThat(returnedCoins).containsExactlyInAnyOrder("Quarter", "Nickel", "Dime");
+//    }
 }
