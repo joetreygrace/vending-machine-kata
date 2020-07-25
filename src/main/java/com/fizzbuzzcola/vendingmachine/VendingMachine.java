@@ -10,6 +10,11 @@ public class VendingMachine {
     private String displayMessage;
 
     public String displayStatus() {
+        if (displayMessage == "Thank You") {
+            String updatedMessage = displayMessage;
+            displayMessage = "";
+            return updatedMessage;
+        }
         if (displayMessage == "Price: $1.00") {
             String updatedMessage = displayMessage;
             displayMessage = "";
@@ -58,6 +63,8 @@ public class VendingMachine {
         if (product.equalsIgnoreCase("Cola")) {
             if (coinSlotBalance.doubleValue() < 1.00) {
                 displayMessage = "Price: $1.00";
+            } if (coinSlotBalance.doubleValue() >= 1.00) {
+                displayMessage = "Thank You";
             }
         }
         if (product.equalsIgnoreCase("Chips")) {

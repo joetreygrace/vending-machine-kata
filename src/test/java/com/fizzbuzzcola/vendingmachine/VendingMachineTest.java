@@ -66,4 +66,21 @@ public class VendingMachineTest {
         underTest.selectProduct("Candy");
         assertThat(underTest.displayStatus()).isEqualTo("Price: $0.65");
     }
+
+    @Test
+    public void whenColaSelectedAndEnoughMoneyInsertedDisplayReturnsThankYou(){
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.insertCoin("dime");
+        underTest.selectProduct("Cola");
+        assertThat(underTest.displayStatus()).isEqualTo("Thank You");
+    }
+
 }
